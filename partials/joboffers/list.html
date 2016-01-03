@@ -1,0 +1,33 @@
+<div class="container" ng-controller="joboffersController"> 
+    
+        <h3>List of Job Offers</h3>
+        <a class="btn btn-lg btn-success" href="#/joboffers/0">
+            <i class="icon-calendar icon-white"></i>&nbsp;Create New Job Offer</a>
+        <table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>Job</th>
+                    <th>Description</th>
+                    <th>Experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="joboffer in joboffers">
+                    <td>{{joboffer.title}}</td>
+                    <td>{{joboffer.description}}</td>
+                    <td>{{joboffer.experience_id}}
+                        <!--<div ng-controller="ExperienceController">
+                            <select name="experience" id="experience" ng-model="joboffer.experience_id" >
+                                <option ng-repeat="option in availableOptions" value="{{option.id}}">{{option.experience_lebel}}</option>
+                            </select>
+                        </div> -->
+
+                    </td>
+                    <td>
+                    <td><a href="#/joboffers/{{joboffer.id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Job offer</a></td>      
+                </tr>
+            </tbody>
+        </table>
+
+  
+    </div>
