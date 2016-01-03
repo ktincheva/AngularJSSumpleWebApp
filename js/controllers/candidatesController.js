@@ -22,7 +22,7 @@ app.controller('candidatesController', function ($scope, $http, Candidates) {
 
         Candidates.save($scope.candidateData)
                 .success(function (data) {
-                    // if successful, we'll need to refresh the comment list
+                   
                     $scope.candidateData = {};
                     Candidates.get()
                             .success(function (getData) {
