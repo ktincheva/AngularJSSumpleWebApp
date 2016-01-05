@@ -1,5 +1,6 @@
 <div class="col-sm-4 col-sm-offset-4">
     <div class="well">
+        <div class="alert alert-danger" ng-if="loginError" role="alert">{{loginErrorText}}</div>
         <h3>Register</h3>
         <form>
             <div class="form-group">
@@ -10,7 +11,6 @@
             </div>
             <div class="form-group">
                 <div ng-controller="ExperienceController">
-
                     <label for="experience_id"> Candidate experience: </label>
                     <select name="experienceid" id="experienceid"  
                             ng-model="candidateData.experienceid"

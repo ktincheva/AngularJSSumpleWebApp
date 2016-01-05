@@ -8,6 +8,7 @@ app.controller('joboffersController', function ($scope, $rootScope, $location, j
             .success(function (data) {
                 $scope.joboffers = data;
                 $scope.candidate = $rootScope.candidate
+                $scope.availableOptions = $rootScope.availableOptions;
                 $scope.loading = false;
             })
             .error(function (data) {

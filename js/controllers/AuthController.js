@@ -1,10 +1,12 @@
-app.controller('AuthController', function ($auth, $http, $rootScope, $scope, $location, Candidates) {
+app.controller('AuthController', function ($auth, $http, $rootScope, $scope, $location, Candidates, Experience, AuthService) {
 
     $scope.email = '';
     $scope.password = '';
     $scope.newUser = {};
     $scope.loginError = false;
     $scope.loginErrorText = '';
+
+
 
     $scope.login = function () {
 
@@ -13,19 +15,20 @@ app.controller('AuthController', function ($auth, $http, $rootScope, $scope, $lo
             password: $scope.password
         }
 
-        $auth.login(credentials).then(function () {
-
-            return $http.get('api/authenticate/user');
-
-        }, function (error) {
-            $scope.loginError = true;
-            $scope.loginErrorText = error.data.error;
-
-        }).then(function (response) {
-            $rootScope.currentUser = response.data.user;
-            $scope.loginError = false;
-            $scope.loginErrorText = '';           
-        });
+        AuthService.login(credentials)
+                .success(function (result) {
+                    console.log(result);
+                    $scope.currentUser = result.data.user;
+                    $scope.loginError = false;
+                    $scope.loginErrorText = '';
+                    $location.path('/jobofferslist');
+                    Session.create(result.data.user, result.data.user.id, result.data.user.role);
+                })
+                .error(function () {
+                    $scope.loginError = true;
+                    $scope.loginErrorText = 'Yps, somthing went wrong! Invalid user name or passwod';
+                    $location.path('/login');
+                });
     }
 
 
@@ -33,17 +36,25 @@ app.controller('AuthController', function ($auth, $http, $rootScope, $scope, $lo
     $scope.submitCandidate = function () {
         $scope.loading = true;
         Candidates.save($scope.candidateData)
-                .success(function (data) {
-
-                    // if successful, we'll need to refresh the comment list
-                    $scope.joboffer = {};
-                    $rootScope.candidate = data.data;
-                    console.log($rootScope.candidate);
-                    $scope.loading = false;
-                    $location.path('/jobofferslist');
+                .success(function (result) {
+                    if (result.success)
+                    {
+                        // if successful, we'll need to refresh the comment list
+                        $scope.joboffer = {};
+                        $rootScope.candidate = result.data;
+                        $scope.loading = false;
+                        $location.path('/jobofferslist');
+                    }
+                    else
+                    {
+                        $scope.loginError = true;
+                        $scope.loginErrorText = "User already exists";
+                        $scope.loading = false;
+                        $location.path('/register');
+                    }
                 })
-                .error(function (data) {
-                    console.log(data)
+                .error(function (result) {
+                    console.log(result)
                 });
 
     };

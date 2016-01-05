@@ -1,7 +1,7 @@
 /*
  * Controller return experince options
  */
-app.controller('ExperienceController', function ($scope, $http, Experience) {
+app.controller('ExperienceController', function ($scope, $rootScope, $http, Experience) {
     $scope.data = {
         repeatSelect: null,
         availableOptions: [],
@@ -11,7 +11,7 @@ app.controller('ExperienceController', function ($scope, $http, Experience) {
     Experience.getExperience()
             .success(function (data) {
                 console.log(data)
-                $scope.availableOptions = data;
+                $rootScope.availableOptions = data;
                 $scope.loading = false;
             })
             .error(function (data) {
