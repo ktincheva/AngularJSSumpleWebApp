@@ -15,7 +15,7 @@
             <tr ng-repeat="joboffer in joboffers">
                 <td>{{joboffer.title}}</td>
                 <td>{{joboffer.description}}</td>
-                <td>{{joboffer.experience_id}}</td>
+                <td>{{joboffer.experience.experience_lebel}}</td>
                 <td>
                 <td><a href="#/joboffers-apply/{{joboffer.id}}/{{candidate.id}}" class="btn btn-primary">&nbsp; Apply</a></td>      
             </tr>

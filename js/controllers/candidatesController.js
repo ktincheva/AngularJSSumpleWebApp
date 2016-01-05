@@ -3,9 +3,21 @@
 app.controller('candidatesController', function ($scope, $http, Candidates) {
 
     $scope.candidateData = {};
-
     $scope.loading = true;
-
+    var getCandidateData = function () {
+        Candidates.get()
+                .success(function (getData) {
+                    console.log(getData);
+                    $scope.candidates = getData;
+                    $scope.loading = false;
+                })
+                .error(function (data) {
+                    console.log(data)
+                });
+        ;
+    }
+    
+    
     getCandidateData()
     $scope.submitCandidates = function () {
         $scope.loading = true;
@@ -32,16 +44,6 @@ app.controller('candidatesController', function ($scope, $http, Candidates) {
                 });
     };
 
-    $scope.getCandidateData = function () {
-        Candidates.get()
-                .success(function (getData) {
-                    $scope.candidates = getData;
-                    $scope.loading = false;
-                })
-                .error(function (data) {
-                    console.log(data)
-                });
-        ;
-    }
+    
 
 });
