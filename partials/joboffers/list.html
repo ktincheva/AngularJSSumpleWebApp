@@ -1,3 +1,4 @@
+<div ng-include='"templates/navbar.html"'></div>
 <div class="container" ng-controller="joboffersController"> 
     
         <h3>List of Job Offers</h3>
@@ -15,7 +16,7 @@
                 <tr ng-repeat="joboffer in joboffers">
                     <td>{{joboffer.title}}</td>
                     <td>{{joboffer.description}}</td>
-                    <td>{{joboffer.experience_id}}
+                    <td>{{joboffer.experience.experience_lebel}}
                         <!--<div ng-controller="ExperienceController">
                             <select name="experience" id="experience" ng-model="joboffer.experience_id" >
                                 <option ng-repeat="option in availableOptions" value="{{option.id}}">{{option.experience_lebel}}</option>
@@ -24,7 +25,8 @@
 
                     </td>
                     <td>
-                    <td><a href="#/joboffers/{{joboffer.id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Job offer</a></td>      
+                    <td><a href="#/joboffers/{{joboffer.id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit</a></td>
+                    <td><a href="#/joboffers-applied/{{joboffer.id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-link"></i>&nbsp; Candidates</a></td> 
                 </tr>
             </tbody>
         </table>

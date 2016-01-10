@@ -1,50 +1,59 @@
+<div ng-include='"templates/navbar.html"'></div>
+
 <div class="container" ng-controller="candidatesController"> 
-   
+    <div ng-controller="ExperienceController"></div>   
     <div class="page-header">
-        <h2>Laravel and Angular Single Page Application</h2>
-        <h4>Candidates</h4>
+        <h3>Candidates:</h3>
+    </div>
+    <div class="row col-sm-12">
+        <h4>Create new</h4>
+        <form ng-submit="submitCandidates()">
+            <div class="form-group col-sm-6">
+                <input type="text" class="form-control input-sm" name="name" ng-model="candidateData.name" placeholder="Name">
+            </div>
+            <div class="form-group col-sm-6">
+                <input type="email" class="form-control" placeholder="Email" ng-model="candidateData.email" required>
+            </div>
+            <div class="form-group col-sm-6">
+                <input type="password" class="form-control" placeholder="Password" ng-model="candidateData.password">
+            </div>
+            <div  class="form-group col-sm-6" ng-controller="ExperienceController">
+                <label for="experience_id"> Candidate experience: </label>
+                <select name="experienceid" id="experienceid"  
+                        ng-model="candidateData.experienceid"
+                        ng-options="option.id as option.experience_lebel for option in availableOptions">
+                </select>
+            </div>
+            <div class="form-group text-right">   
+                <button type="submit" class="btn btn-primary btn-md">Submit</button>
+            </div>
+        </form>
     </div>
 
-    <form ng-submit="submitCandidates()"> <
-        <div class="form-group">
-            <input type="text" class="form-control input-sm" name="name" ng-model="candidateData.name" placeholder="Name">
-        </div>
+    <div class="row col-sm-12">
+        <hr>
+        <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+        <h4>Candidates list:</h4>
+        <table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Experience</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="candidate in candidates">
 
-        <div class="form-group">
-              <div ng-controller="ExperienceController">
-            
-                <label for="candidate.experience_id"> Candidate experience: </label>
-                <select name="candidate.experienceid" id="candidate.experienceid"  
-                     ng-model="candidateData.experienceid"
-                     ng-options="option.id as option.experience_lebel for option in availableOptions">
-                </select>
-            
-            <hr>
-        </div>
-        </div>
-        <div class="form-group text-right">   
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-    </form>
+                    <td>{{candidate.id}}{{candidate.candidate}}</td>
+                    <td>{{candidate.user.name}}</td>
+                    <td>{{candidate.experience.experience_lebel}}
+                    </td>
+                    <td>
+                    <td><a href="#/candidate-edit/{{candidate.user.id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit</a></td>
 
-    <pre>
-	{{ candidateData}}
-    </pre>
-
-    <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
-    <div class="comment" ng-hide="loading" ng-repeat="candidate in candidates">
-       
-        <h3>Candidate #{{ candidate.id}} <small>Name: {{ candidate.name}}</small></h3>
-        <p>Candidate experience:{{ candidate.experienceid}}</p>
-        <div ng-controller="ExperienceController">
-            
-                <label for="candidate.experience_id"> Candidate experience: </label>
-                <select name="candidate.experienceid" id="candidate.experienceid"  
-                     ng-model="candidate.experienceid"
-                     ng-options="option.id as option.experience_lebel for option in availableOptions">
-                </select>      
-            <hr>
-        </div><br>
-        <p><a href="#" ng-click="deleteCandidate(candidate.id)" class="text-muted">Delete</a></p>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -1,4 +1,5 @@
-<div class="col-sm-4 col-sm-offset-4" ng- >
+<div ng-include='"templates/navbar.html"'></div>
+<div class="col-sm-4 col-sm-offset-4" ng-controller="authController">
     <div class="alert alert-danger" ng-if="loginError" role="alert">{{loginErrorText}}</div>
     <div class="well">
         <h3>Login</h3>
@@ -12,7 +13,7 @@
             <button class="btn btn-primary" ng-click="login()">Submit</button>
         </form>
         <br />
-        <a ui-sref="login">Login</a>
+        <a href="#/register">Register</a>
     </div>
 </div>
  

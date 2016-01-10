@@ -1,15 +1,14 @@
-var Session = angular.module('Session', []);
-
-Session.factory('Session', function () {
-  this.create = function (sessionId, userId, userRole) {
-    this.id = sessionId;
-    this.userId = userId;
-    this.userRole = userRole;
-  };
-  this.destroy = function () {
-    this.id = null;
-    this.userId = null;
-    this.userRole = null;
-  };
+app.factory('SessionService', function () {
+    return{
+        get: function (key) {
+            return sessionStorage.getItem(key);
+        },
+        set: function (key, val) {
+            return sessionStorage.setItem(key, val);
+        },
+        unset: function (key) {
+            return sessionStorage.removeItem(key);
+        }
+    }
 });
 

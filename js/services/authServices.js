@@ -1,6 +1,6 @@
-app.factory('AuthService', function ($http) {
+app.factory('AuthService', function ($http, $rootScope) {
     var authService = {};
-    console.log("login")
+    var user;
     authService.login = function (credentials) {
         return $http({
             method: 'POST',
@@ -10,15 +10,21 @@ app.factory('AuthService', function ($http) {
         });
     };
     authService.isAuthenticated = function () {
-        return !!Session.userId;
+        // 
+        if (!user) user =  JSON.parse(sessionStorage.getItem('user'));
+        if(user) return user;
+        else return false;
+       
     };
 
     authService.isAuthorized = function (authorizedRoles) {
-        if (!angular.isArray(authorizedRoles)) {
-            authorizedRoles = [authorizedRoles];
-        }
-        return (authService.isAuthenticated() &&
-                authorizedRoles.indexOf(Session.userRole) !== -1);
+        //
+    };
+    
+    authService.setUser = function(aUser)
+    {
+        console.log(aUser)
+        user = aUser;
     };
 
     return authService;

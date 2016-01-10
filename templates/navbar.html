@@ -1,0 +1,27 @@
+<nav class="navbar navbar-inverse navbar-fixed-top dropdown-append-to-body" role="navigation" >
+    <div class="container" ng-controller="navbarController">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">PenSoft</a>
+        </div>
+
+        <div ng-if="loggedIn.role >= 0" class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="loggedIn.role == 0"><a href="#/joboffers">Job Offers</a></li>
+                <li ng-if="loggedIn.role == 1"><a href="#/jobofferslist">Job Offers</a></li>
+                <li ng-if="loggedIn.role == 0"><a href="#/candidates">Candidates</a></li>
+                <li class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" data-toggle = "dropdown">{{loggedIn.name}}<span class="caret"></span></button>
+                    <ul class="dropdown-menu">  
+                        <li><a href="#/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

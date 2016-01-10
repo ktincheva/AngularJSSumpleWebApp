@@ -12,11 +12,7 @@ app.factory("jobOffers", ['$http', function ($http) {
         obj.getJoboffer = function (id) {
             return $http.get(myConfig.apiUrl + 'joboffers/' + id);
         }
-
-        
-
         obj.saveJoboffer = function (id, jobofferData) {
-            console.log(jobofferData);
             return $http({
                 method: 'POST',
                 url: myConfig.apiUrl+'joboffers',
@@ -32,7 +28,26 @@ app.factory("jobOffers", ['$http', function ($http) {
                 return status.data;
             });
         };
-
+        
+        obj.getApplied = function(id)
+        {
+            return $http({
+                method: 'POST',
+                url: myConfig.apiUrl+'applied',
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                data:  $.param({'jobid':id})
+            });
+        }
+        obj.selectCandidate = function(applicationid, statusid, jobofferid)
+        {
+            console.log(applicationid, statusid, jobofferid);
+            return $http({
+                method: 'POST',
+                url: myConfig.apiUrl+'selectCandidate',
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                data:  $.param({'jobid':jobofferid, 'appid':applicationid, 'statusid':statusid})
+            });
+        }
         return obj;
     }]);
  

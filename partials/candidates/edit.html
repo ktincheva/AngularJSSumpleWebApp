@@ -5,8 +5,7 @@
             <nav class= "navbar navbar-default" role= "navigation" >
                 <div class= "navbar-header" >
                     <a class= "navbar-brand" href= "#/joboffers"><i class="glyphicon glyphicon-th-large"></i> Job Offers List </a>
-                    <a data-ng-show="joboffer.id" class= "navbar-brand" href= "#/joboffers/0"><i class="glyphicon glyphicon-plus"></i> Create Job Offer </a>
-                    <a data-ng-show="joboffer.id" class= "navbar-brand pull-right"><i class="glyphicon glyphicon-edit"></i> Editing Job Offer {{joboffer.id}}</a>
+                    <a data-ng-show="candidate.id" class= "navbar-brand pull-right"><i class="glyphicon glyphicon-edit"></i> Currently Editing Candidate {{candidate.id}}</a>
                 </div>
             </nav>
             <header>
@@ -15,45 +14,36 @@
             <div class="col-md-12">
 
                 <form role="form" name="myForm" class="form-horizontal">
+                    
                     <div class="row">
                         <div class= "form-group" ng-class="{error: myForm.title.$invalid}">
-                            <label class= "col-md-2"> Title </label>
+                            <label class= "col-md-2"> Name </label>
                             <div class="col-md-4">
-                                <input name="title" data-ng-model="joboffer.title" type= "text" class= "form-control" placeholder="Title" required/>
-                                <span ng-show="myForm.title.$dirty && myForm.title.$invalid" class="help-inline">Title Required</span>
+                                <input name="name" data-ng-model="candidate.name" type= "text" class= "form-control" placeholder="Name" required/>
+                                <span ng-show="myForm.name.$dirty && myForm.name.$invalid" class="help-inline">Name Required</span>
                             </div>
                         </div>
-
-                        <div class= "form-group">
-                            <label class= "col-md-2">Description </label>
-                            <div class="col-md-4">
-                                <textarea data-ng-model="joboffer.description"  class= "form-control" placeholder= "Description"></textarea>
-                            </div>
-                        </div>
-                        <div class= "form-group">
+                        <div class="form-group">
+                            <label class= "col-md-2" for="candidate.experienceid"> Candidate experience: </label>
                             <div ng-controller="ExperienceController">
-
-                                <label class= "col-md-2" for="experience_id"> Experience: </label>
                                 <div class="col-md-4">
-                                    <select name="experience_id" id="experience_id" data-ng-model="joboffer.experience_id">
+                                    <select name="candidate.experienceid" id="candidate.experienceid" data-ng-model="candidate.candidate.experienceid">
                                         <option ng-repeat="option in availableOptions" value="{{option.id}}">{{option.experience_lebel}}</option>
                                     </select>
-
                                 </div>
+                                <hr>
                             </div>
-
                         </div>
-
                         <div class= "form-group">
                             <label class= "col-md-2"></label>
                             <div class="col-md-4">
-
-                                <a href="#/joboffers" class="btn">Cancel</a>
-                                <button data-ng-click="saveJoboffer(joboffer);"
+                                <a href="#/" class="btn">Cancel</a>
+                                <button data-ng-click="saveCandidate(candidate);"
+                                        
                                         ng-disabled="myForm.$invalid"
                                         class="btn btn-primary">{{buttonText}}</button>
-                                <button data-ng-click="deleteJoboffer(joboffer)"
-                                        data-ng-show="joboffer.id" class="btn btn-warning">Delete</button>
+                                <button data-ng-click="deleteCandidate(candidate)"
+                                        data-ng-show="candidate.id" class="btn btn-warning">Delete</button>
                             </div>
                         </div>
                     </div>
